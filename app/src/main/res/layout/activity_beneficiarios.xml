@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.upb.atencionssu_lp.AfiliadosActivity">
+    tools:context="edu.upb.atencionssu_lp.BeneficiariosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:textSize="24sp"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/afiliadosRecyclerView"
+            android:id="@+id/beneficiariosRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="30"></android.support.v7.widget.RecyclerView>
@@ -38,7 +38,7 @@
             android:layout_weight="40">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/beneficiariosRecyclerView"
+                android:id="@+id/beneficiariosSecundariosRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 ></android.support.v7.widget.RecyclerView>

@@ -12,19 +12,19 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import edu.upb.atencionssu_lp.Modelos.Afiliado;
+import edu.upb.atencionssu_lp.Modelos.Beneficiario;
 import edu.upb.atencionssu_lp.R;
 
 /**
  * Created by Adrian on 4/30/2018.
  */
 
-public class AfiliadosAdapter extends RecyclerView.Adapter<AfiliadosAdapter.ViewHolder> {
-    private ArrayList<Afiliado> datos;
+public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapter.ViewHolder> {
+    private ArrayList<Beneficiario> datos;
     private Context context;
 
-    public AfiliadosAdapter(Context context) {
-        datos = new ArrayList<Afiliado>();
+    public BeneficiarioAdapter(Context context) {
+        datos = new ArrayList<Beneficiario>();
         this.context = context;
     }
 
@@ -36,10 +36,10 @@ public class AfiliadosAdapter extends RecyclerView.Adapter<AfiliadosAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Afiliado afiliado = datos.get(position);
-        holder.nombreTextView.setText(afiliado.getNombre());
-        holder.idTextView.setText(afiliado.getId());
-        Glide.with(context).load(afiliado.getImagenPerfilURL()).into(holder.imagenPerfilImageView);
+        Beneficiario beneficiario = datos.get(position);
+        holder.nombreTextView.setText(beneficiario.getNombre());
+        holder.idTextView.setText(beneficiario.getId());
+        Glide.with(context).load(beneficiario.getImagenPerfilURL()).into(holder.imagenPerfilImageView);
 
     }
 
@@ -48,13 +48,13 @@ public class AfiliadosAdapter extends RecyclerView.Adapter<AfiliadosAdapter.View
         return datos.size();
     }
 
-    public void colocarDatos(ArrayList<Afiliado> datos) {
+    public void colocarDatos(ArrayList<Beneficiario> datos) {
         this.datos = datos;
         notifyDataSetChanged();
     }
 
-    public void addAfiliado(Afiliado afiliado) {
-        datos.add(afiliado);
+    public void addAfiliado(Beneficiario beneficiario) {
+        datos.add(beneficiario);
         notifyDataSetChanged();
     }
 

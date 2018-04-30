@@ -4,13 +4,13 @@ package edu.upb.atencionssu_lp.Modelos;
  * Created by Adrian on 4/27/2018.
  */
 
-public class Afiliado {
+public class Beneficiario {
 
     private String nombre;
     private int id;
     private String imagenPerfilURL;
 
-    public Afiliado(String nombre, int id, String imagenPerfilURL) {
+    public Beneficiario(String nombre, int id, String imagenPerfilURL) {
         this.nombre = nombre;
         this.id = id;
         this.imagenPerfilURL = imagenPerfilURL;

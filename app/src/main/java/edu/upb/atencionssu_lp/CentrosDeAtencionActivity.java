@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import edu.upb.atencionssu_lp.Adapters.AfiliadosAdapter;
 import edu.upb.atencionssu_lp.Adapters.CentrosDeAtencionAdapter;
 
 public class CentrosDeAtencionActivity extends AppCompatActivity {

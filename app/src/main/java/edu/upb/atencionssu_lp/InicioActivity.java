@@ -29,7 +29,7 @@ public class InicioActivity extends AppCompatActivity {
         afiliadosButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, AfiliadosActivity.class);
+                Intent intent = new Intent(context, BeneficiariosActivity.class);
                 startActivity(intent);
             }
         });

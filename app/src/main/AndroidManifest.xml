@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AfiliadosActivity" />
+        <activity android:name=".BeneficiariosActivity" />
         <activity android:name=".CentrosDeAtencionActivity" />
         <activity android:name=".AgendaActivity" />
         <activity android:name=".EmergenciaActivity"></activity>

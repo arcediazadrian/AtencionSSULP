@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Atencion SSU-LP</string>
+    <string name="afiliados">Afiliados</string>
+    <string name="agenda">Agenda</string>
+    <string name="centros_de_atencion">Centros de Atencion</string>
+    <string name="emergencia">Emergencia</string>
+    <string name="beneficiarios">Beneficiarios</string>
+</resources>

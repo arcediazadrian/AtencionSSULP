@@ -8,12 +8,10 @@ public class Beneficiario {
 
     private String nombre;
     private int id;
-    private String imagenPerfilURL;
 
-    public Beneficiario(String nombre, int id, String imagenPerfilURL) {
+    public Beneficiario(String nombre, int id) {
         this.nombre = nombre;
         this.id = id;
-        this.imagenPerfilURL = imagenPerfilURL;
     }
 
     public String getNombre() {
@@ -32,11 +30,4 @@ public class Beneficiario {
         this.id = id;
     }
 
-    public String getImagenPerfilURL() {
-        return imagenPerfilURL;
-    }
-
-    public void setImagenPerfilURL(String imagenPerfilURL) {
-        this.imagenPerfilURL = imagenPerfilURL;
-    }
 }

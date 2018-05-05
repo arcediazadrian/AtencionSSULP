@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upb.atencionssu_lp.Modelos.Beneficiario;
 import edu.upb.atencionssu_lp.R;
@@ -20,7 +21,7 @@ import edu.upb.atencionssu_lp.R;
  */
 
 public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapter.ViewHolder> {
-    private ArrayList<Beneficiario> datos;
+    private List<Beneficiario> datos;
     private Context context;
 
     public BeneficiarioAdapter(Context context) {
@@ -30,7 +31,7 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_afiliado, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_beneficiario, parent, false);
         return new ViewHolder(view);
     }
 
@@ -38,9 +39,7 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Beneficiario beneficiario = datos.get(position);
         holder.nombreTextView.setText(beneficiario.getNombre());
-        holder.idTextView.setText(beneficiario.getId());
-        Glide.with(context).load(beneficiario.getImagenPerfilURL()).into(holder.imagenPerfilImageView);
-
+        holder.idTextView.setText("" + beneficiario.getId());
     }
 
     @Override
@@ -58,6 +57,10 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
         notifyDataSetChanged();
     }
 
+    public void setBeneficiarios(List<Beneficiario> beneficiarios){
+        datos = beneficiarios;
+    }
+
     public void clear() {
         datos.clear();
         notifyDataSetChanged();
@@ -67,14 +70,12 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
 
         TextView nombreTextView;
         TextView idTextView;
-        ImageView imagenPerfilImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             nombreTextView = (TextView) itemView.findViewById(R.id.nombreTextView);
             idTextView = (TextView) itemView.findViewById(R.id.idTextView);
-            imagenPerfilImageView = (ImageView) itemView.findViewById(R.id.imagenPerfilImageView);
         }
     }
 }

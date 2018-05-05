@@ -5,10 +5,27 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/imagenPerfilImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre: "
+            android:textSize="20sp"
+            android:gravity="end"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="ID:"
+            android:gravity="end"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

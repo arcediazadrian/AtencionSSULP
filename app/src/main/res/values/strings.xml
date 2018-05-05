@@ -5,4 +5,5 @@
     <string name="centros_de_atencion">Centros de Atencion</string>
     <string name="emergencia">Emergencia</string>
     <string name="beneficiarios">Beneficiarios</string>
+    <string name="ip">http://192.168.0.105/ssulp_php/</string>
 </resources>

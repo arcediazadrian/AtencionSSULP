@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/medicoLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp">
+
+    <TextView
+        android:id="@+id/nombreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Nombre Medico"
+        android:layout_marginVertical="2dp"/>
+
+    <TextView
+        android:id="@+id/especialidadTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Especialidad"
+        android:layout_marginVertical="2dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/horarioEntradaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Horario Entrada"
+            android:layout_marginVertical="2dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/horarioSalidaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Horario Salida"
+            android:layout_marginVertical="2dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/telefonoMovilTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Telefono Movil"
+        android:layout_marginVertical="2dp"/>
+
+    <TextView
+        android:id="@+id/correoDiarioTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Correo Diario"
+        android:layout_marginVertical="2dp"/>
+
+
+</LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.upb.atencionssu_lp.Modelos.Beneficiario;
@@ -38,8 +39,8 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Beneficiario beneficiario = datos.get(position);
-        holder.nombreTextView.setText(beneficiario.getNombre());
-        holder.idTextView.setText("" + beneficiario.getId());
+        holder.nombreTextView.setText(beneficiario.getNombreCompleto());
+        holder.idTextView.setText(beneficiario.getID());
     }
 
     @Override
@@ -47,7 +48,7 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
         return datos.size();
     }
 
-    public void colocarDatos(ArrayList<Beneficiario> datos) {
+    public void colocarDatos(List<Beneficiario> datos) {
         this.datos = datos;
         notifyDataSetChanged();
     }
@@ -55,10 +56,6 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
     public void addAfiliado(Beneficiario beneficiario) {
         datos.add(beneficiario);
         notifyDataSetChanged();
-    }
-
-    public void setBeneficiarios(List<Beneficiario> beneficiarios){
-        datos = beneficiarios;
     }
 
     public void clear() {

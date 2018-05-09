@@ -34,9 +34,9 @@ public class BeneficiariosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_beneficiarios);
 
 
-        if (Credenciales.Titular.getId() == 0) {
+        if (Integer.parseInt(Credenciales.Titular.getID()) == 0) {
             goLogInScreen();
-        }else{
+        } else {
             beneficiariosTitularRecyclerView = findViewById(R.id.beneficiarioTitularRecyclerView);
             beneficiariosTitularRecyclerView.setHasFixedSize(true);
             beneficiariosTitularRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -45,7 +45,7 @@ public class BeneficiariosActivity extends AppCompatActivity {
             beneficiariosTitularRecyclerView.setAdapter(beneficiarioTitularAdapter);
             beneficiarios = new LinkedList<>();
             beneficiarios.add(Credenciales.Titular);
-            beneficiarioTitularAdapter.setBeneficiarios(beneficiarios);
+            beneficiarioTitularAdapter.colocarDatos(beneficiarios);
 
 
             beneficiariosSecundariosRecyclerView = findViewById(R.id.beneficiarioTitularRecyclerView);

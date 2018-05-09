@@ -22,7 +22,9 @@
         <activity android:name=".CentrosDeAtencionActivity" />
         <activity android:name=".AgendaActivity" />
         <activity android:name=".EmergenciaActivity" />
-        <activity android:name=".LogInActivity"></activity>
+        <activity android:name=".LogInActivity" />
+        <activity android:name=".MedicosActivity" />
+        <activity android:name=".HorarioPickerActivity"></activity>
     </application>
 
 </manifest>

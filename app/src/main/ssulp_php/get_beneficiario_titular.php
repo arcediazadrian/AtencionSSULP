@@ -20,7 +20,7 @@ if (isset($_POST["id_beneficiario"])) {
     $id_beneficiario = $_POST["id_beneficiario"];
 
     // get a product from products table
-    $result = mysql_query("SELECT id_beneficiario, primer_nombre FROM beneficiarios WHERE id_beneficiario = $id_beneficiario");
+    $result = mysql_query("SELECT * FROM beneficiarios WHERE id_beneficiario = $id_beneficiario");
 
     if (!empty($result)) {
         // check for empty result
@@ -28,18 +28,26 @@ if (isset($_POST["id_beneficiario"])) {
 
             $result = mysql_fetch_array($result);
 			
-			$response["beneficiarios"] = array();
+			$response["beneficiario"] = array();
 
             $beneficiario = array();
-            $beneficiario["id_beneficiario"] = $result["id_beneficiario"];
-            $beneficiario["primer_nombre"] = $result["primer_nombre"];
+            $beneficiario["id_beneficiario"] = $result["ID_Beneficiario"];
+			$beneficiario["fecha_afiliacion"] = $result["Fecha_Afiliacion"];
+			$beneficiario["fecha_nacimiento"] = $result["Fecha_Nacimiento"];
+			$beneficiario["primer_apellido"] = $result["Primer_Apellido"];
+            $beneficiario["primer_nombre"] = $result["Primer_Nombre"];
+			$beneficiario["segundo_apellido"] = $result["Segundo_Apellido"];
+			$beneficiario["segundo_nombre"] = $result["Segundo_Nombre"];
+			$beneficiario["tercer_nombre"] = $result["Tercer_Nombre"];
+			$beneficiario["tipo_beneficiario"] = $result["Tipo_Benefiiciario"];
+			$beneficiario["tipo_de_sangre"] = $result["Tipo_De_Sangre"];
+			$beneficiario["ciudad"] = $result["Ciudad"];
+			$beneficiario["direccion"] = $result["Direccion"];
+			$beneficiario["genero"] = $result["Genero"];
             // success
             $response["success"] = 1;
 
-            // user node
-            $response["beneficiario"] = array();
-
-            array_push($response["beneficiarios"], $beneficiario);
+            array_push($response["beneficiario"], $beneficiario);
 
             // echoing JSON response
             echo json_encode($response);

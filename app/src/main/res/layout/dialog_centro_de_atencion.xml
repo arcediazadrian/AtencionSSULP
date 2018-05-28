@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/cDialogImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_red_light"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/cDialogDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Direccion"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/cDialogTelefonoFijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Telefono Fijo"
+        android:layout_gravity="center"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cDialogAtras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Atras"
+            android:layout_gravity="left"
+            android:layout_marginHorizontal="30dp"/>
+
+        <Button
+            android:id="@+id/cDialogMapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Mostrar en Mapa"
+            android:layout_gravity="right"
+            android:layout_marginHorizontal="30dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

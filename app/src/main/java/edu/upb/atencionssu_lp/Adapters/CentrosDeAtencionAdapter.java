@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,7 @@ import edu.upb.atencionssu_lp.R;
 public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAtencionAdapter.ViewHolder>{
     private ArrayList<CentroDeAtencion> datos;
     private Context context;
+    private OnCentroDeAtencionClickListener onCentroDeAtencionClickListener;
 
     public CentrosDeAtencionAdapter(Context context) {
         datos = new ArrayList<CentroDeAtencion>();
@@ -36,11 +38,23 @@ public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAten
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CentroDeAtencion centroDeAtencion = datos.get(position);
+        final CentroDeAtencion centroDeAtencion = datos.get(position);
         holder.nombreTextView.setText(centroDeAtencion.getNombre());
         holder.direccionTextView.setText(centroDeAtencion.getDireccion());
         Glide.with(context).load(centroDeAtencion.getImagenCentroAtencionURL()).into(holder.imagenCentroAtencionImageView);
+        holder.centroDeAtencionLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onCentroDeAtencionClickListener != null){
+                    onCentroDeAtencionClickListener.onCentroDeAtencionClick(centroDeAtencion);
+                }
+            }
+        });
 
+    }
+
+    public void setOnCentroDeAtencionClickListener(OnCentroDeAtencionClickListener onCentroDeAtencionClickListener) {
+        this.onCentroDeAtencionClickListener = onCentroDeAtencionClickListener;
     }
 
     @Override
@@ -65,6 +79,7 @@ public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAten
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout centroDeAtencionLayout;
         TextView nombreTextView;
         TextView direccionTextView;
         ImageView imagenCentroAtencionImageView;
@@ -72,6 +87,7 @@ public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAten
         public ViewHolder(View itemView) {
             super(itemView);
 
+            centroDeAtencionLayout = (LinearLayout) itemView.findViewById(R.id.centrosDeAtencionLayout);
             nombreTextView = (TextView) itemView.findViewById(R.id.nombreTextView);
             direccionTextView = (TextView) itemView.findViewById(R.id.direccionTextView);
             imagenCentroAtencionImageView = (ImageView) itemView.findViewById(R.id.imagenCentroAtencionImageView);

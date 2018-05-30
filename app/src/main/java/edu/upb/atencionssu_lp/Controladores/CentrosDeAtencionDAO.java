@@ -15,4 +15,8 @@ public class CentrosDeAtencionDAO {
     public static void loadCentrosDeAtencion(){
         centroDeAtencion.add(new CentroDeAtencion("Hospital Obrero", "La Paz", ""));
     }
+
+    public static void clear(){
+        centroDeAtencion = new ArrayList<>();
+    }
 }

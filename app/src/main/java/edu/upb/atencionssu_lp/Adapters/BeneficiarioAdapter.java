@@ -40,7 +40,7 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Beneficiario beneficiario = datos.get(position);
         holder.nombreTextView.setText(beneficiario.getNombreCompleto());
-        holder.idTextView.setText(beneficiario.getID());
+        holder.idTextView.setText("ID: " + beneficiario.getID());
     }
 
     @Override

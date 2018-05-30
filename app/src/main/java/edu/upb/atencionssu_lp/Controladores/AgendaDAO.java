@@ -159,6 +159,8 @@ public class AgendaDAO {
                         // Do something when error occurred
                         Toast.makeText(context, "Ocurrio un error al acceder a la base de datos: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         Log.d("Volley Error", error.getLocalizedMessage() + "/n" + error.getMessage());
+
+                        callback.onFailure();
                     }
                 }
         );
@@ -230,6 +232,8 @@ public class AgendaDAO {
                         // Do something when error occurred
                         Toast.makeText(context, "Ocurrio un error al acceder a la base de datos: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         Log.d("Volley Error", error.getLocalizedMessage() + "/n" + error.getMessage());
+
+                        callback.onFailure();
                     }
                 }
         );
@@ -285,6 +289,8 @@ public class AgendaDAO {
                         // Do something when error occurred
                         Toast.makeText(context, "Ocurrio un error al acceder a la base de datos: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         Log.d("Volley Error", error.getLocalizedMessage() + "/n" + error.getMessage());
+
+                        callback.onFailure();
                     }
                 }
         );
@@ -324,6 +330,8 @@ public class AgendaDAO {
                         // Do something when error occurred
                         Toast.makeText(context, "Ocurrio un error al acceder a la base de datos: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         Log.d("Volley Error", error.getLocalizedMessage() + "/n" + error.getMessage());
+
+                        callback.onFailure();
                     }
                 }
         );

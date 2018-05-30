@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,6 +22,7 @@ import edu.upb.atencionssu_lp.Adapters.HorariosAdapter;
 import edu.upb.atencionssu_lp.Adapters.MedicosAdapter;
 import edu.upb.atencionssu_lp.Adapters.OnHorarioClickListener;
 import edu.upb.atencionssu_lp.Controladores.AgendaDAO;
+import edu.upb.atencionssu_lp.Controladores.NavigatorDAO;
 import edu.upb.atencionssu_lp.Modelos.Credenciales;
 import edu.upb.atencionssu_lp.Modelos.Horario;
 import edu.upb.atencionssu_lp.Volley.ServerCallback;
@@ -33,11 +37,18 @@ public class HorarioPickerActivity extends AppCompatActivity {
     private int turno_seleccionado;
     private String timestamp_id;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario_picker);
+
         context = getApplicationContext();
+
+        NavigatorDAO.setActivity(context, "agendar");
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_agendar);
+        navigation.setOnNavigationItemSelectedListener(NavigatorDAO.mOnNavigationItemSelectedListener);
 
         id_medico = getIntent().getStringExtra("id_medico");
         fecha_agendada = getIntent().getStringExtra("date");
@@ -100,6 +111,11 @@ public class HorarioPickerActivity extends AppCompatActivity {
                     List<Horario> horario = generateHorario(turnos);
                     horariosAdapter.colocarDatos(horario);
                 }
+
+                @Override
+                public void onFailure(){
+
+                }
             });
             return null;
         }
@@ -123,6 +139,11 @@ public class HorarioPickerActivity extends AppCompatActivity {
                 public void onSucces() {
                     Intent intent = new Intent(context, AgendaActivity.class);
                     startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(){
+
                 }
             });
             return null;

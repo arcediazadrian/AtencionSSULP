@@ -1,14 +1,18 @@
 package edu.upb.atencionssu_lp;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,22 +23,27 @@ import java.util.ArrayList;
 import edu.upb.atencionssu_lp.Adapters.CentrosDeAtencionAdapter;
 import edu.upb.atencionssu_lp.Adapters.OnCentroDeAtencionClickListener;
 import edu.upb.atencionssu_lp.Controladores.CentrosDeAtencionDAO;
+import edu.upb.atencionssu_lp.Controladores.NavigatorDAO;
 import edu.upb.atencionssu_lp.Modelos.CentroDeAtencion;
 
 public class CentrosDeAtencionActivity extends AppCompatActivity {
 
     private RecyclerView centrosDeAtencionRecyclerView;
     private CentrosDeAtencionAdapter centrosDeAtencionAdapter;
-    //private Dialog mapDialog;
-    //private Button dialogMapButton;
-    //private Button dialogAtrasButton;
-    //private TextView dialogDireccionTextView;
+    private Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centros_de_atencion);
+
+        context = getApplicationContext();
+
+        NavigatorDAO.setActivity(context, "centros_de_atencion");
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_centros_de_atencion);
+        navigation.setOnNavigationItemSelectedListener(NavigatorDAO.mOnNavigationItemSelectedListener);
 
         centrosDeAtencionRecyclerView = findViewById(R.id.centrosDeAtencionRecycleView);
         centrosDeAtencionRecyclerView.setHasFixedSize(true);
@@ -73,6 +82,7 @@ public class CentrosDeAtencionActivity extends AppCompatActivity {
     private void loadData() {
         CentrosDeAtencionDAO.loadCentrosDeAtencion();
         centrosDeAtencionAdapter.colocarDatos((ArrayList<CentroDeAtencion>) CentrosDeAtencionDAO.centroDeAtencion);
+        CentrosDeAtencionDAO.clear();
     }
 
     public void mapDialog(CentroDeAtencion centroDeAtencion){

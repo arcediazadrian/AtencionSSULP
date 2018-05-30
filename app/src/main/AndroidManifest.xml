@@ -51,9 +51,6 @@
             android:name=".CentroDeAtencionMapsActivity"
             android:label="@string/title_activity_centro_de_atencion_maps" />
         <activity android:name=".SplashActivity" />
-        <activity
-            android:name=".BNVActivity"
-            android:label="@string/title_activity_bnv"></activity>
     </application>
 
 </manifest>

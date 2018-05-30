@@ -6,4 +6,5 @@ package edu.upb.atencionssu_lp.Volley;
 
 public interface ServerCallback {
     void onSucces();
+    void onFailure();
 }

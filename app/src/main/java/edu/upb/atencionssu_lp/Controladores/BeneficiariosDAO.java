@@ -16,13 +16,17 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import edu.upb.atencionssu_lp.Modelos.Beneficiario;
 import edu.upb.atencionssu_lp.R;
 import edu.upb.atencionssu_lp.Volley.CustomRequest;
+import edu.upb.atencionssu_lp.Volley.ServerCallback;
 import edu.upb.atencionssu_lp.Volley.VolleyRequestQueue;
 
 /**
@@ -52,8 +56,9 @@ public class BeneficiariosDAO {
 
 
     public static Beneficiario beneficiario = new Beneficiario("La Paz","Los Pinos", new Date(), 'M' , "primer nombre", "primer apellido","segundo nombre", "segundo apellido",new Date(), "tipo seguro", "0");
+    public static List<Beneficiario> beneficiariosSecundarios = new ArrayList<>();
 
-    public static Beneficiario getBeneficiarioById(String id, final Context context){
+    public static void getBeneficiarioById(String id, final Context context, final ServerCallback callback){
         String url = context.getString(R.string.ip) + url_get_beneficiario_titular;
 
         Map<String, String> params = new HashMap<String, String>();
@@ -121,8 +126,9 @@ public class BeneficiariosDAO {
                                 beneficiario.setCiudad(ciudad);
                                 beneficiario.setDireccion(direccion);
                                 beneficiario.setGenero(genero.toCharArray()[0]);
-
                             }
+
+                            callback.onSucces();
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -134,6 +140,8 @@ public class BeneficiariosDAO {
                         // Do something when error occurred
                         Toast.makeText(context, "Ocurrio un error al acceder a la base de datos: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         Log.d("Volley Error", error.getLocalizedMessage()+ "/n" + error.getMessage());
+
+                        callback.onFailure();
                     }
                 }
         );
@@ -141,6 +149,10 @@ public class BeneficiariosDAO {
         VolleyRequestQueue.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
         Log.d("Beneficiario",beneficiario.getID() + " " + beneficiario.getNombreCompleto());
-        return beneficiario;
+    }
+
+    public static void clearBeneficiarios(){
+        beneficiario = new Beneficiario("La Paz","Los Pinos", new Date(), 'M' , "primer nombre", "primer apellido","segundo nombre", "segundo apellido",new Date(), "tipo seguro", "0");;
+        beneficiariosSecundarios = new LinkedList<>();
     }
 }

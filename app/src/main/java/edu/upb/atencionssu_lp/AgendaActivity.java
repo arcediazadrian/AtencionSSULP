@@ -4,21 +4,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.List;
 
 import edu.upb.atencionssu_lp.Adapters.AgendaAdapter;
 import edu.upb.atencionssu_lp.Controladores.AgendaDAO;
+import edu.upb.atencionssu_lp.Controladores.NavigatorDAO;
 import edu.upb.atencionssu_lp.Modelos.Agenda;
 import edu.upb.atencionssu_lp.Modelos.Credenciales;
 import edu.upb.atencionssu_lp.Volley.ServerCallback;
 
-public class AgendaActivity extends AppCompatActivity{
+public class AgendaActivity extends AppCompatActivity {
 
     private RecyclerView agendaRecyclerView;
     private FloatingActionButton agendarButton;
@@ -31,6 +35,11 @@ public class AgendaActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
         context = getApplicationContext();
+
+        NavigatorDAO.setActivity(context, "agendar");
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_agendar);
+        navigation.setOnNavigationItemSelectedListener(NavigatorDAO.mOnNavigationItemSelectedListener);
 
         agendaRecyclerView = findViewById(R.id.agendaRecyclerView);
         agendarButton = findViewById(R.id.agendarButton);
@@ -65,6 +74,11 @@ public class AgendaActivity extends AppCompatActivity{
                 @Override
                 public void onSucces() {
                     agendaAdapter.colocarDatos(AgendaDAO.agenda);
+                }
+
+                @Override
+                public void onFailure(){
+
                 }
             });
             return null;

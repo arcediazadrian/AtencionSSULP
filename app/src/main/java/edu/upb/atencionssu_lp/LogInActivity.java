@@ -39,7 +39,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 id = logInEditText.getText().toString();
-
+                new LoadBeneficiarios().execute();
             }
         });
     }

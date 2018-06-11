@@ -1,36 +1,43 @@
 package edu.upb.atencionssu_lp;
 
-import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
-import android.widget.DatePicker;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
+import edu.upb.atencionssu_lp.Adapters.BeneficiarioAdapter;
 import edu.upb.atencionssu_lp.Adapters.MedicosAdapter;
+import edu.upb.atencionssu_lp.Adapters.OnBeneficiarioClickListener;
 import edu.upb.atencionssu_lp.Adapters.OnMedicoClickListener;
 import edu.upb.atencionssu_lp.Controladores.AgendaDAO;
 import edu.upb.atencionssu_lp.Controladores.NavigatorDAO;
-import edu.upb.atencionssu_lp.DatePicker.DatePickerFragment;
+import edu.upb.atencionssu_lp.Modelos.Beneficiario;
+import edu.upb.atencionssu_lp.Modelos.Credenciales;
 import edu.upb.atencionssu_lp.Modelos.Medico;
 import edu.upb.atencionssu_lp.Volley.ServerCallback;
 
-public class MedicosActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class MedicosActivity extends AppCompatActivity{
 
     private RecyclerView medicosRecyclerView;
     private MedicosAdapter medicosAdapter;
     private Context context;
     private String id_medico_escogido;
     private String fecha_agendada;
+    private String beneficiarioEscogido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +60,22 @@ public class MedicosActivity extends AppCompatActivity implements DatePickerDial
 
         new LoadMedicos().execute();
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        fecha_agendada = simpleDateFormat.format(calendar.getTime());
+
+        Log.d("Fecha a agendar",fecha_agendada);
+
         medicosAdapter.setOnMedicoClickListener(new OnMedicoClickListener() {
             @Override
             public void onMedicoClick(Medico medico) {
                 id_medico_escogido = medico.getID();
-                DatePickerFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+                goHorarioPickerScreen();
             }
         });
+
+        escogerBeneficiarioDialog();
     }
 
     class LoadMedicos extends AsyncTask<Void, Void, Void> {
@@ -91,22 +106,61 @@ public class MedicosActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        fecha_agendada = simpleDateFormat.format(calendar.getTime());
-        goHorarioPickerScreen();
-    }
 
     private void goHorarioPickerScreen() {
         Intent intent = new Intent(context, HorarioPickerActivity.class);
         intent.putExtra("id_medico", id_medico_escogido);
         intent.putExtra("date", fecha_agendada);
+        intent.putExtra("beneficiairo", beneficiarioEscogido);
         startActivity(intent);
+    }
+
+    public void escogerBeneficiarioDialog(){
+        final Dialog escogerBeneficiarioDialog = new Dialog(MedicosActivity.this);
+        escogerBeneficiarioDialog.setContentView(R.layout.dialog_escoger_beneficiario);
+
+        LinearLayout escogerTitular = (LinearLayout) escogerBeneficiarioDialog.findViewById(R.id.escogerBeneficiarioLayout);
+        TextView nombreTitular = (TextView) escogerBeneficiarioDialog.findViewById(R.id.escogerNombreBeneficiarioTextView);
+        TextView idTitular = (TextView) escogerBeneficiarioDialog.findViewById(R.id.escogerIdBeneficiarioTextView);
+
+        nombreTitular.setText(Credenciales.Titular.getNombreCompleto());
+        nombreTitular.setText(Credenciales.Titular.getID());
+
+        escogerTitular.setEnabled(true);
+
+        escogerTitular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beneficiarioEscogido = Credenciales.Titular.getID();
+                escogerBeneficiarioDialog.cancel();
+            }
+        });
+
+        if(Credenciales.Secuandarios.size() > 0) {
+
+
+            RecyclerView beneficiariosSecundarios = (RecyclerView) escogerBeneficiarioDialog.findViewById(R.id.beneficiarioTitularRecyclerView);
+            beneficiariosSecundarios.setHasFixedSize(true);
+            beneficiariosSecundarios.setLayoutManager(new LinearLayoutManager(this));
+
+            BeneficiarioAdapter adapter = new BeneficiarioAdapter(MedicosActivity.this);
+            beneficiariosSecundarios.setAdapter(adapter);
+            List<Beneficiario> beneficiarios = new LinkedList<>();
+            beneficiarios.addAll(Credenciales.Secuandarios);
+            adapter.colocarDatos(beneficiarios);
+
+            beneficiariosSecundarios.setEnabled(true);
+
+            adapter.setOnBeneficiarioClickListener(new OnBeneficiarioClickListener() {
+                @Override
+                public void onBeneficiarioClick(Beneficiario beneficiario) {
+                    beneficiarioEscogido = beneficiario.getID();
+                    escogerBeneficiarioDialog.cancel();
+                }
+            });
+
+        }
+
+        escogerBeneficiarioDialog.show();
     }
 }

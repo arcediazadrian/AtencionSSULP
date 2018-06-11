@@ -77,11 +77,12 @@ public class AgendaDAO {
     public static List<Medico> medicos = new ArrayList<>();
     public static List<Integer> horario = new ArrayList<>();
 
-    public static void getAgendaByIdBeneficiario(String id, final Context context, final ServerCallback callback) {
+    public static void getAgendaByIdBeneficiario(String id, String fecha_filtro, final Context context, final ServerCallback callback) {
         String url = context.getString(R.string.ip) + url_get_agenda;
 
         Map<String, String> params = new HashMap<String, String>();
         params.put(TAG_ID_BENEFICIARIO, id);
+        params.put(TAG_AGENDA_FECHA_AGENDADA, fecha_filtro);
 
         // Initialize a new JsonObjectRequest instance
         CustomRequest jsonObjectRequest = new CustomRequest(Request.Method.POST,

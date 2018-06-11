@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import edu.upb.atencionssu_lp.Adapters.AgendaAdapter;
@@ -29,6 +31,7 @@ public class AgendaActivity extends AppCompatActivity {
     private AgendaAdapter agendaAdapter;
     private Context context;
     private List<Agenda> agenda;
+    private String fecha_filtro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class AgendaActivity extends AppCompatActivity {
         agendaAdapter = new AgendaAdapter(this);
         agendaRecyclerView.setAdapter(agendaAdapter);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        fecha_filtro = simpleDateFormat.format(calendar.getTime());
+
         new LoadAgenda().execute();
 
         agendarButton.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +78,7 @@ public class AgendaActivity extends AppCompatActivity {
         }
 
         protected Void doInBackground(Void... params) {
-            AgendaDAO.getAgendaByIdBeneficiario(Credenciales.Titular.getID(), context, new ServerCallback() {
+            AgendaDAO.getAgendaByIdBeneficiario(Credenciales.Titular.getID(), fecha_filtro, context, new ServerCallback() {
                 @Override
                 public void onSucces() {
                     agendaAdapter.colocarDatos(AgendaDAO.agenda);

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -135,12 +136,18 @@ public class InicioActivity extends AppCompatActivity implements LocationListene
 
         bienvenidoTextView = findViewById(R.id.bienvenidoTextView);
 
+        String msg = getIntent().getStringExtra("loginmsg");
+        if(msg != null && !msg.equals("")) {
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        }
+
         NavigatorDAO.setActivity(context, "inicio");
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_inicio);
         navigation.setOnNavigationItemSelectedListener(NavigatorDAO.mOnNavigationItemSelectedListener);
 
         showGpsDialogAndGetLocation();
+
 
     }
 }

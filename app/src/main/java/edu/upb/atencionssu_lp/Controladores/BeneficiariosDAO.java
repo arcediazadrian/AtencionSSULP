@@ -76,59 +76,68 @@ public class BeneficiariosDAO {
 
                         // Process the JSON
                         try{
-                            // Get the JSON array
-                            JSONArray array = response.getJSONArray(TAG_BENEFICIARIOS);
+
+                            String succes = response.getString(TAG_SUCCESS);
+                            if(succes.equals("1")) {
 
 
-                            // Loop through the array elements
-                            for(int i=0;i<array.length();i++){
-                                // Get current json object
-                                JSONObject beneficiarioJson = array.getJSONObject(i);
+                                // Get the JSON array
+                                JSONArray array = response.getJSONArray(TAG_BENEFICIARIOS);
 
-                                // Get the current beneficiario (json object) data
 
-                                String id = beneficiarioJson.getString(TAG_ID);
-                                String feha_afiliacion = beneficiarioJson.getString(TAG_FECHA_AFILIACION);
-                                String fecha_nacimiento = beneficiarioJson.getString(TAG_FECHA_NACIMIENTO);
-                                String primer_apellido = beneficiarioJson.getString(TAG_PRIMER_APELLIDO);
-                                String primer_nombre = beneficiarioJson.getString(TAG_PRIMER_NOMBRE);
-                                String segundo_apellido = beneficiarioJson.getString(TAG_SEGUNDO_APELLIDO);
-                                String segundo_nombre = beneficiarioJson.getString(TAG_SEGUNDO_NOMBRE);
-                                String tercer_nombre = beneficiarioJson.getString(TAG_TERCER_NOMBRE);
-                                String tipo_beneficiario = beneficiarioJson.getString(TAG_TIPO_BENEFICIARIO);
-                                String tipo_de_sangre = beneficiarioJson.getString(TAG_TIPO_DE_SANGRE);
-                                String ciudad = beneficiarioJson.getString(TAG_CIUDAD);
-                                String genero = beneficiarioJson.getString(TAG_GENERO);
-                                String direccion = beneficiarioJson.getString(TAG_DIRECCION);
+                                // Loop through the array elements
+                                for (int i = 0; i < array.length(); i++) {
+                                    // Get current json object
+                                    JSONObject beneficiarioJson = array.getJSONObject(i);
 
-                                SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-                                Date fa = null;
-                                Date fn = null;
+                                    // Get the current beneficiario (json object) data
 
-                                try {
-                                    fa = ft.parse(feha_afiliacion);
-                                    fn = ft.parse(fecha_nacimiento);
-                                } catch (ParseException e) {
-                                    Toast.makeText(context, "Error al persear fechas", Toast.LENGTH_SHORT);
-                                    Log.d("Error Parser", "Error al parsear fechas");
+                                    String id = beneficiarioJson.getString(TAG_ID);
+                                    String feha_afiliacion = beneficiarioJson.getString(TAG_FECHA_AFILIACION);
+                                    String fecha_nacimiento = beneficiarioJson.getString(TAG_FECHA_NACIMIENTO);
+                                    String primer_apellido = beneficiarioJson.getString(TAG_PRIMER_APELLIDO);
+                                    String primer_nombre = beneficiarioJson.getString(TAG_PRIMER_NOMBRE);
+                                    String segundo_apellido = beneficiarioJson.getString(TAG_SEGUNDO_APELLIDO);
+                                    String segundo_nombre = beneficiarioJson.getString(TAG_SEGUNDO_NOMBRE);
+                                    String tercer_nombre = beneficiarioJson.getString(TAG_TERCER_NOMBRE);
+                                    String tipo_beneficiario = beneficiarioJson.getString(TAG_TIPO_BENEFICIARIO);
+                                    String tipo_de_sangre = beneficiarioJson.getString(TAG_TIPO_DE_SANGRE);
+                                    String ciudad = beneficiarioJson.getString(TAG_CIUDAD);
+                                    String genero = beneficiarioJson.getString(TAG_GENERO);
+                                    String direccion = beneficiarioJson.getString(TAG_DIRECCION);
+
+                                    SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date fa = null;
+                                    Date fn = null;
+
+                                    try {
+                                        fa = ft.parse(feha_afiliacion);
+                                        fn = ft.parse(fecha_nacimiento);
+                                    } catch (ParseException e) {
+                                        Toast.makeText(context, "Error al persear fechas", Toast.LENGTH_SHORT);
+                                        Log.d("Error Parser", "Error al parsear fechas");
+                                    }
+
+                                    beneficiario.setID(id);
+                                    beneficiario.setFechaAfiliacion(fa);
+                                    beneficiario.setFechaNacimiento(fn);
+                                    beneficiario.setPrimerApellido(primer_apellido);
+                                    beneficiario.setPrimerNombre(primer_nombre);
+                                    beneficiario.setSegundoApellido(segundo_apellido);
+                                    beneficiario.setSegundoNombre(segundo_nombre);
+                                    beneficiario.setTercerNombre(tercer_nombre);
+                                    beneficiario.setTipoBeneficiario(tipo_beneficiario);
+                                    beneficiario.setTipoDeSangre(tipo_de_sangre);
+                                    beneficiario.setCiudad(ciudad);
+                                    beneficiario.setDireccion(direccion);
+                                    beneficiario.setGenero(genero.toCharArray()[0]);
                                 }
 
-                                beneficiario.setID(id);
-                                beneficiario.setFechaAfiliacion(fa);
-                                beneficiario.setFechaNacimiento(fn);
-                                beneficiario.setPrimerApellido(primer_apellido);
-                                beneficiario.setPrimerNombre(primer_nombre);
-                                beneficiario.setSegundoApellido(segundo_apellido);
-                                beneficiario.setSegundoNombre(segundo_nombre);
-                                beneficiario.setTercerNombre(tercer_nombre);
-                                beneficiario.setTipoBeneficiario(tipo_beneficiario);
-                                beneficiario.setTipoDeSangre(tipo_de_sangre);
-                                beneficiario.setCiudad(ciudad);
-                                beneficiario.setDireccion(direccion);
-                                beneficiario.setGenero(genero.toCharArray()[0]);
-                            }
+                                callback.onSucces();
 
-                            callback.onSucces();
+                            }else{
+                                callback.onFailure();
+                            }
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

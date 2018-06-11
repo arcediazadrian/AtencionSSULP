@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,9 +45,12 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
-    private void goInicioScreen() {
+    private void goInicioScreen(String message) {
         Intent intent = new Intent(this, InicioActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        intent.putExtra("loginmsg", message);
         startActivity(intent);
     }
 
@@ -62,13 +66,14 @@ public class LogInActivity extends AppCompatActivity {
                 @Override
                 public void onSucces() {
                     Credenciales.Titular = BeneficiariosDAO.beneficiario;
-                    Toast.makeText(context, "Sign in as " + BeneficiariosDAO.beneficiario.getNombreCompleto(), Toast.LENGTH_LONG);
-                    goInicioScreen();
+                    Log.d("Log in" , "singed in with id " + BeneficiariosDAO.beneficiario.getNombreCompleto());
+                    goInicioScreen("Sign in as " + BeneficiariosDAO.beneficiario.getNombreCompleto());
                 }
 
                 @Override
                 public void onFailure(){
-
+                    Log.d("Log in", "error signing in with id " + id);
+                    goInicioScreen("Error al iniciar sesion");
                 }
             });
             return null;

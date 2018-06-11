@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +25,7 @@ import edu.upb.atencionssu_lp.R;
 public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapter.ViewHolder> {
     private List<Beneficiario> datos;
     private Context context;
+    private OnBeneficiarioClickListener onBeneficiarioClickListener;
 
     public BeneficiarioAdapter(Context context) {
         datos = new ArrayList<Beneficiario>();
@@ -38,9 +40,21 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Beneficiario beneficiario = datos.get(position);
+        final Beneficiario beneficiario = datos.get(position);
         holder.nombreTextView.setText(beneficiario.getNombreCompleto());
         holder.idTextView.setText("ID: " + beneficiario.getID());
+        holder.beneficiarioLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onBeneficiarioClickListener != null){
+                    onBeneficiarioClickListener.onBeneficiarioClick(beneficiario);
+                }
+            }
+        });
+    }
+
+    public void setOnBeneficiarioClickListener(OnBeneficiarioClickListener onBeneficiarioClickListener) {
+        this.onBeneficiarioClickListener = onBeneficiarioClickListener;
     }
 
     @Override
@@ -65,12 +79,14 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout beneficiarioLayout;
         TextView nombreTextView;
         TextView idTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            beneficiarioLayout = (LinearLayout) itemView.findViewById(R.id.beneficiarioLayout);
             nombreTextView = (TextView) itemView.findViewById(R.id.nombreTextView);
             idTextView = (TextView) itemView.findViewById(R.id.idTextView);
         }

@@ -36,7 +36,7 @@
             android:id="@+id/cDialogAtras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:text="Atras"
             android:layout_gravity="left"
             android:layout_marginHorizontal="30dp"/>
@@ -45,7 +45,7 @@
             android:id="@+id/cDialogMapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:text="Mostrar en Mapa"
             android:layout_gravity="right"
             android:layout_marginHorizontal="30dp"/>

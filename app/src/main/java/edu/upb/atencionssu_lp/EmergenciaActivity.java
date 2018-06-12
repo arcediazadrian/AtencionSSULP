@@ -56,6 +56,8 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
 
         emergenciaFloatingActionButton = findViewById(R.id.emergenciaFloatingActionButton);
         emergenciaFloatingActionButton.setEnabled(false);
+        emergenciaFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        emergenciaFloatingActionButton.setAlpha(0.25f);
 
         emergenciaFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +121,7 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
 
         emergenciaTextView.setText("Localizacion Encontrada!");
         emergenciaFloatingActionButton.setEnabled(true);
-        emergenciaFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        emergenciaFloatingActionButton.setAlpha(1f);
     }
 
     @Override

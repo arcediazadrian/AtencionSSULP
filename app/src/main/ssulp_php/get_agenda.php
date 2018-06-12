@@ -22,10 +22,10 @@ if (isset($_POST["id_beneficiario"]) && isset($_POST["fecha_agendada"])) {
 
     // get a product from products table
     $result = mysql_query("SELECT A.id_agenda as id_agenda, A.id_beneficiario as id_beneficiario, A.fecha_agendada as fecha_agendada, A.numero_consulta as numero_consulta, A.id_medico as id_medico, A.turno as turno,
-						   B.primer_apellido as beneficiario_primer_apellido, B.primer_nombre as beneficiario_primer_nombre, B.segundo_apellido as beneficiario_segundo_apellido, B.segundo_nombre as beneficiario_segundo_nombre,
+						   B.primer_apellido as beneficiario_primer_apellido, B.primer_nombre as beneficiario_primer_nombre, B.segundo_apellido as beneficiario_segundo_apellido, B.segundo_nombre as beneficiario_segundo_nombre, B.fecha_nacimiento as beneficiario_fecha_nacimiento,
 						   C.id_oficina as consultorio_id, C.nombre as consultorio_nombre, C.codigo as consultorio_codigo, C.piso as consultorio_piso,
 						   M.primer_apellido as medico_primer_apellido, M.primer_nombre as medico_primer_nombre, M.segundo_apellido as medico_segundo_apellido, M.segundo_nombre as medico_segundo_nombre, M.correo_institucional as medico_correo_institucional, M.correo_diario as medico_correo_diario, M.telefono_movil as medico_telefono_movil, M.telefono_oficina as medico_telefono_oficina, M.especialidad as medico_especialidad
-						   FROM agenda A, beneficiarios B, consultorios C, medicos M WHERE A.id_beneficiario = $id_beneficiario and B.id_beneficiario = $id_beneficiario and A.id_medico = M.id_medico and M.id_oficina = C.id_oficina and A.fecha_agendada = '$fecha_filtro'");
+						   FROM agenda A, beneficiarios B, consultorios C, medicos M WHERE A.id_beneficiario = $id_beneficiario and B.id_beneficiario = $id_beneficiario and A.id_medico = M.id_medico and M.id_oficina = C.id_oficina and A.fecha_agendada >= '$fecha_filtro'");
 
     if (!empty($result)) {
         // check for empty result
@@ -46,6 +46,7 @@ if (isset($_POST["id_beneficiario"]) && isset($_POST["fecha_agendada"])) {
 			$agenda["beneficiario_primer_nombre"] = $row["beneficiario_primer_nombre"];
 			$agenda["beneficiario_segundo_apellido"] = $row["beneficiario_segundo_apellido"];
 			$agenda["beneficiario_segundo_nombre"] = $row["beneficiario_segundo_nombre"];
+			$agenda["beneficiario_fecha_nacimiento"] = $row["beneficiario_fecha_nacimiento"];
 			$agenda["consultorio_id"] = $row["consultorio_id"];
 			$agenda["consultorio_nombre"] = $row["consultorio_nombre"];
 			$agenda["consultorio_codigo"] = $row["consultorio_codigo"];

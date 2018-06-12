@@ -2,6 +2,8 @@ package edu.upb.atencionssu_lp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +48,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         agendaRecyclerView = findViewById(R.id.agendaRecyclerView);
         agendarButton = findViewById(R.id.agendarButton);
+        agendarButton.setBackgroundTintList(ColorStateList.valueOf(Color.BLUE));
 
         agendaRecyclerView.setHasFixedSize(true);
         agendaRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,11 +57,11 @@ public class AgendaActivity extends AppCompatActivity {
         agendaRecyclerView.setAdapter(agendaAdapter);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 1);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         fecha_filtro = simpleDateFormat.format(calendar.getTime());
 
         new LoadAgenda().execute();
+
 
         agendarButton.setOnClickListener(new View.OnClickListener() {
             @Override

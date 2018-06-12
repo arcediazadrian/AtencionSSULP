@@ -21,7 +21,8 @@ public class Medico extends Datos_Personales {
     private String horarioSalida;
     private String primerNombre;
     private String segundoNombre;
-    private String turno;
+    private int turnoEntrada;
+    private int turnoSalida;
 
     public Medico(String ciudad, String dir, Date fechaNac, char gen, String primerNombre, String segundoNombre, String app, String apm, Consultorio consultorio, String correo, String esp, String horaIn, String horaSal) {
         super(ciudad, dir, fechaNac, gen);
@@ -34,7 +35,7 @@ public class Medico extends Datos_Personales {
         this.horarioSalida = horaSal;
         this.segundoNombre = segundoNombre;
         this.consultorio = consultorio;
-        this.turno = calcularTurno(horaIn);
+        //this.turno = calcularTurno(horaIn);
     }
 
     public Medico(String id, String apellidoPaterno, String apellidoMaterno, String primerNombre, String segundoNombre, String correoInstitucional, String correoDiario, String telefonoOficina, String telefonoMovil, String especialidad, Consultorio consultorio) {
@@ -67,6 +68,8 @@ public class Medico extends Datos_Personales {
         this.horarioInicio = horarioInicio;
         this.horarioSalida = horarioSalida;
         this.consultorio = consultorio;
+        this.turnoEntrada = calcularTurnoEntrada(horarioInicio);
+        this.turnoSalida = calcularTurnoSalida(this.turnoEntrada);
     }
 
     //getters y setters
@@ -180,31 +183,59 @@ public class Medico extends Datos_Personales {
         this.segundoNombre = nombre;
     }
 
-    public String getTurno() {
-        return this.turno;
+    public int getTurnoEntrada() {
+        return turnoEntrada;
     }
 
-    public void setTurno(String turn) {
-        this.turno = turn;
+    public void setTurnoEntrada(int turnoEntrada) {
+        this.turnoEntrada = turnoEntrada;
     }
+
+    public int getTurnoSalida() {
+        return turnoSalida;
+    }
+
+    public void setTurnoSalida(int turnoSalida) {
+        this.turnoSalida = turnoSalida;
+    }
+
+    // public String getTurno() {
+    //    return this.turno;
+    //
+
+   // public void setTurno(String turn) {
+      //  this.turno = turn;
+   // }
     //funciones
 
-    private String calcularTurno(String hora) {
-        String turn = null;
-        System.out.println("Classes.Medico.calcularTurno() =" + hora.compareTo("12:00"));
+    private int calcularTurnoEntrada(String hInicio){
+        int turno = 0;
+        int hora = Integer.parseInt(hInicio.substring(0, hInicio.indexOf(':')));
+        int min = Integer.parseInt(hInicio.substring(hInicio.indexOf(':')+1, hInicio.length()));
 
-        if (hora.compareTo("12:00") >= 0) {
-            turn = "TT";
-        } else {
-            turn = "TM";
-        }
-
-
-        return turn;
+        turno = (hora-8) + ((min == 0)?0:(min == 15)?1:(min == 30)?2:(min == 45)?3:0);
+        return turno;
     }
 
     public String getNombreCompleto() {
         return apellidoPaterno + " " + apellidoMaterno + " " + primerNombre + " " + segundoNombre;
+    }
+
+    public String getNombre() {
+        return primerNombre + " " + segundoNombre;
+    }
+
+    public String getApellido() {
+        return apellidoPaterno+ " " + apellidoMaterno;
+    }
+
+    public String getNombreSimple(){
+        return apellidoPaterno + " " + primerNombre;
+    }
+
+    private int calcularTurnoSalida(int turnoEntrada){
+        int turno = turnoEntrada + (4*8);
+        return turno;
     }
 
 

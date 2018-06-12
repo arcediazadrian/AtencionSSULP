@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/beneficiarioLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    >
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Nombre: "/>
+            android:orientation="horizontal"
+            android:padding="8dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_afiliacion"
+            android:layout_gravity="center"
+            android:scaleX="2.0"
+            android:scaleY="2.0"/>
+
+        <LinearLayout
+            android:id="@+id/beneficiarioLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
 
         <TextView
             android:id="@+id/nombreTextView"
             android:layout_width="match_parent"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
 
@@ -24,9 +37,19 @@
             android:id="@+id/idTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:textSize="20sp"
             android:text="ID: "
             />
+            </LinearLayout>
 
+        </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"/>
 
 </LinearLayout>

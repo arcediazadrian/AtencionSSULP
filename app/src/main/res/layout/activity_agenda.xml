@@ -4,34 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.upb.atencionssu_lp.AgendaActivity"
-    android:orientation="vertical"
-    android:weightSum="10">
+    tools:context="edu.upb.atencionssu_lp.AgendaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/agendaRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="9"
-        ></android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/agendaTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:text="Agenda"
+            android:gravity="center"
+            android:textSize="18sp" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/agendarButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="end"
-        android:layout_margin="50dp"
-        android:scaleY="2"
-        android:scaleX="2"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/agendaRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="70"></android.support.v7.widget.RecyclerView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/agendarButton"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:clickable="true"
+                android:layout_weight="20"
+                android:layout_gravity="end"
+                android:layout_marginBottom="40dp"
+                android:layout_marginRight="50dp"
+                app:srcCompat="@android:drawable/ic_input_add"
+                android:scaleY="1.5"
+                android:scaleX="1.5"
+                />
 
     </LinearLayout>
 

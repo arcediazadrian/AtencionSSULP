@@ -63,5 +63,20 @@
         android:text="Correo Diario"
         android:layout_marginVertical="2dp"/>
 
+    <TextView
+        android:id="@+id/consultorioMedicoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Correo Diario"
+        android:layout_marginVertical="2dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"/>
+
 
 </LinearLayout>

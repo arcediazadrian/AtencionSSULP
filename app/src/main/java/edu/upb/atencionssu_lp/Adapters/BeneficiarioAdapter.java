@@ -41,8 +41,8 @@ public class BeneficiarioAdapter extends RecyclerView.Adapter<BeneficiarioAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Beneficiario beneficiario = datos.get(position);
-        holder.nombreTextView.setText(beneficiario.getNombreCompleto());
-        holder.idTextView.setText("ID: " + beneficiario.getID());
+        holder.nombreTextView.setText(beneficiario.getNombre() + "\n" + beneficiario.getApellido());
+        holder.idTextView.setText(beneficiario.getMatricula());
         holder.beneficiarioLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

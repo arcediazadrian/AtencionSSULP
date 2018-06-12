@@ -41,7 +41,6 @@ public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAten
         final CentroDeAtencion centroDeAtencion = datos.get(position);
         holder.nombreTextView.setText(centroDeAtencion.getNombre());
         holder.direccionTextView.setText(centroDeAtencion.getDireccion());
-        Glide.with(context).load(centroDeAtencion.getImagenCentroAtencionURL()).into(holder.imagenCentroAtencionImageView);
         holder.centroDeAtencionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +81,6 @@ public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAten
         LinearLayout centroDeAtencionLayout;
         TextView nombreTextView;
         TextView direccionTextView;
-        ImageView imagenCentroAtencionImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -90,7 +88,6 @@ public class CentrosDeAtencionAdapter extends RecyclerView.Adapter<CentrosDeAten
             centroDeAtencionLayout = (LinearLayout) itemView.findViewById(R.id.centrosDeAtencionLayout);
             nombreTextView = (TextView) itemView.findViewById(R.id.nombreTextView);
             direccionTextView = (TextView) itemView.findViewById(R.id.direccionTextView);
-            imagenCentroAtencionImageView = (ImageView) itemView.findViewById(R.id.imagenCentroAtencionImageView);
         }
     }
 }

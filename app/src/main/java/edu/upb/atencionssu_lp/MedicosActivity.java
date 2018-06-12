@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class MedicosActivity extends AppCompatActivity{
     private MedicosAdapter medicosAdapter;
     private Context context;
     private String id_medico_escogido;
+    private int turno_entrada_medico, turno_salida_medico;
     private String fecha_agendada;
     private String beneficiarioEscogido;
 
@@ -71,6 +73,8 @@ public class MedicosActivity extends AppCompatActivity{
             @Override
             public void onMedicoClick(Medico medico) {
                 id_medico_escogido = medico.getID();
+                turno_entrada_medico = medico.getTurnoEntrada();
+                turno_salida_medico = medico.getTurnoSalida();
                 goHorarioPickerScreen();
             }
         });
@@ -110,6 +114,8 @@ public class MedicosActivity extends AppCompatActivity{
     private void goHorarioPickerScreen() {
         Intent intent = new Intent(context, HorarioPickerActivity.class);
         intent.putExtra("id_medico", id_medico_escogido);
+        intent.putExtra("turno_entrada", turno_entrada_medico);
+        intent.putExtra("turno_salida", turno_salida_medico);
         intent.putExtra("date", fecha_agendada);
         intent.putExtra("beneficiairo", beneficiarioEscogido);
         startActivity(intent);
@@ -118,13 +124,16 @@ public class MedicosActivity extends AppCompatActivity{
     public void escogerBeneficiarioDialog(){
         final Dialog escogerBeneficiarioDialog = new Dialog(MedicosActivity.this);
         escogerBeneficiarioDialog.setContentView(R.layout.dialog_escoger_beneficiario);
+        escogerBeneficiarioDialog.setTitle("Escoger beneficiario");
+        //escogerBeneficiarioDialog.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+        //escogerBeneficiarioDialog.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 
         LinearLayout escogerTitular = (LinearLayout) escogerBeneficiarioDialog.findViewById(R.id.escogerBeneficiarioLayout);
         TextView nombreTitular = (TextView) escogerBeneficiarioDialog.findViewById(R.id.escogerNombreBeneficiarioTextView);
         TextView idTitular = (TextView) escogerBeneficiarioDialog.findViewById(R.id.escogerIdBeneficiarioTextView);
 
-        nombreTitular.setText(Credenciales.Titular.getNombreCompleto());
-        nombreTitular.setText(Credenciales.Titular.getID());
+        nombreTitular.setText(Credenciales.Titular.getNombre() + "\n" + Credenciales.Titular.getApellido());
+        idTitular.setText(Credenciales.Titular.getMatricula());
 
         escogerTitular.setEnabled(true);
 

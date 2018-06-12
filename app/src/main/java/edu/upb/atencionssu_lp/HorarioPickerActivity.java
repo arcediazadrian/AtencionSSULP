@@ -33,6 +33,7 @@ public class HorarioPickerActivity extends AppCompatActivity {
     private HorariosAdapter horariosAdapter;
     private RecyclerView horariosRecyclerView;
     private String id_medico;
+    private int turno_entrada, turno_salida;
     private String fecha_agendada;
     private int turno_seleccionado;
     private String timestamp_id;
@@ -52,6 +53,8 @@ public class HorarioPickerActivity extends AppCompatActivity {
 
         id_medico = getIntent().getStringExtra("id_medico");
         fecha_agendada = getIntent().getStringExtra("date");
+        turno_entrada = getIntent().getIntExtra("turno_entrada", 0);
+        turno_salida = getIntent().getIntExtra("turno_salida", 0);
 
         horariosRecyclerView = findViewById(R.id.horariosRecyclerView);
         horariosRecyclerView.setHasFixedSize(true);
@@ -69,7 +72,7 @@ public class HorarioPickerActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(HorarioPickerActivity.this);
         builder.setMessage("Seguro que desea agendar a esta hora?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         new AddAgenda().execute();
                     }
@@ -157,7 +160,7 @@ public class HorarioPickerActivity extends AppCompatActivity {
 
     private List<Integer> discardTurnos(List<Integer> horario) {
         List<Integer> turnos = new ArrayList<>();
-        for(int i = 0; i <= 48; i++){
+        for(int i = turno_entrada; i <= turno_salida; i++){
             turnos.add(i);
         }
 

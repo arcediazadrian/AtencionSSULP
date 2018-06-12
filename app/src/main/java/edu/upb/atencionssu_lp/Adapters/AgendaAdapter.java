@@ -39,10 +39,11 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
         Agenda agenda = datos.get(position);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = sdf.format(agenda.getFechaDeAtencion());
-        holder.nombreTextView.setText(agenda.getPaciente().getNombreCompleto());
-        holder.fechaTextView.setText(fecha);
-        holder.horaTextView.setText(agenda.getHoraConsulta());
-        holder.medicoTextView.setText(agenda.getMedico().getNombreCompleto());
+        holder.nombreTextView.setText("Paciente: " + agenda.getPaciente().getNombreSimple());
+        holder.fechaTextView.setText("Fecha: " + fecha);
+        holder.horaTextView.setText("Hora: " + agenda.getHoraConsulta());
+        holder.medicoTextView.setText("Medico: " + agenda.getMedico().getNombreCompleto());
+        holder.consultorioTextView.setText("Consultorio: " + agenda.getMedico().getConsultorio().getCodigo() + " en el piso " + agenda.getMedico().getConsultorio().getPiso());
     }
 
     @Override
@@ -71,6 +72,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
         TextView fechaTextView;
         TextView horaTextView;
         TextView medicoTextView;
+        TextView consultorioTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +81,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
             fechaTextView= (TextView) itemView.findViewById(R.id.fechaTextView);
             horaTextView= (TextView) itemView.findViewById(R.id.horaTextView);
             medicoTextView = (TextView) itemView.findViewById(R.id.medicoTextView);
+            consultorioTextView = (TextView) itemView.findViewById(R.id.consultorioTextView);
         }
     }
 }

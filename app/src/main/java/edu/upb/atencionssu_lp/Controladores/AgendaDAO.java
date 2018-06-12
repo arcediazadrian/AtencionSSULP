@@ -57,6 +57,7 @@ public class AgendaDAO {
     private static final String TAG_BENEFICIARIO_PRIMER_NOMBRE = "beneficiario_primer_nombre";
     private static final String TAG_BENEFICIARIO_SEGUNDO_APELLIDO = "beneficiario_segundo_apellido";
     private static final String TAG_BENEFICIARIO_SEGUNDO_NOMBRE = "beneficiario_segundo_nombre";
+    private static final String TAG_BENEFICIARIO_FECHA_NACIMIENTO = "beneficiario_fecha_nacimiento";
     private static final String TAG_CONSULTORIO_ID = "consultorio_id";
     private static final String TAG_CONSULTORIO_CODIGO = "consultorio_codigo";
     private static final String TAG_CONSULTORIO_NOMBRE = "consultorio_nombre";
@@ -117,6 +118,7 @@ public class AgendaDAO {
                                 String beneficiario_primer_nombre = agendaJson.getString(TAG_BENEFICIARIO_PRIMER_NOMBRE);
                                 String beneficiario_segundo_apellido = agendaJson.getString(TAG_BENEFICIARIO_SEGUNDO_APELLIDO);
                                 String beneficiario_segundo_nombre = agendaJson.getString(TAG_BENEFICIARIO_SEGUNDO_NOMBRE);
+                                String beneficiario_fecha_nacimietno = agendaJson.getString(TAG_BENEFICIARIO_FECHA_NACIMIENTO);
 
                                 String consultorio_id = agendaJson.getString(TAG_CONSULTORIO_ID);
                                 String consultorio_codigo = agendaJson.getString(TAG_CONSULTORIO_CODIGO);
@@ -135,15 +137,17 @@ public class AgendaDAO {
 
                                 SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
                                 Date fa = null;
+                                Date fn = null;
 
                                 try {
                                     fa = ft.parse(fecha_agendada);
+                                    fn = ft.parse(beneficiario_fecha_nacimietno);
                                 } catch (ParseException e) {
                                     Toast.makeText(context, "Error al persear fechas", Toast.LENGTH_SHORT);
                                     Log.d("Error Parser", "Error al parsear fechas");
                                 }
 
-                                Agenda a = new Agenda(id, new Beneficiario(id_beneficiario, beneficiario_primer_apellido, beneficiario_primer_nombre, beneficiario_segundo_apellido, beneficiario_segundo_nombre), fa, consulta, new Medico(id_medico, medico_primer_apellido, medico_segundo_apellido, medico_primer_nombre, medico_segundo_nombre, medico_correo_institucional, medico_correo_diario, medico_telefono_oficina, medico_telefono_movil, medico_especialidad, new Consultorio(consultorio_id, consultorio_nombre, consultorio_codigo, consultorio_piso)), turno);
+                                Agenda a = new Agenda(id, new Beneficiario(id_beneficiario, beneficiario_primer_apellido, beneficiario_primer_nombre, beneficiario_segundo_apellido, beneficiario_segundo_nombre, fn), fa, consulta, new Medico(id_medico, medico_primer_apellido, medico_segundo_apellido, medico_primer_nombre, medico_segundo_nombre, medico_correo_institucional, medico_correo_diario, medico_telefono_oficina, medico_telefono_movil, medico_especialidad, new Consultorio(consultorio_id, consultorio_nombre, consultorio_codigo, consultorio_piso)), turno);
                                 agenda.add(a);
                             }
 

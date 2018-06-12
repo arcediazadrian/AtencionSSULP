@@ -97,6 +97,7 @@ public class CentrosDeAtencionActivity extends AppCompatActivity {
         dialogDireccionTextView.setText(centroDeAtencion.getDireccion());
 
         dialogMapButton.setEnabled(true);
+        dialogMapButton.setText("Mostrar \n en mapa");
         dialogAtrasButton.setEnabled(true);
 
         dialogMapButton.setOnClickListener(new View.OnClickListener() {

@@ -28,13 +28,14 @@ public class Beneficiario extends Datos_Personales {
         super(ciudad, dir, fecha, gen);
     }
 
-    public Beneficiario(String id, String primerApellido, String primerNombre, String segundoApellido, String segundoNombre){
-        super(null, null, null, ' ');
+    public Beneficiario(String id, String primerApellido, String primerNombre, String segundoApellido, String segundoNombre, Date fechaNacimietno){
+        super(null, null, fechaNacimietno,' ');
         this.ID = id;
         this.primerApellido = primerApellido;
         this.primerNombre = primerNombre;
         this.segundoApellido = segundoApellido;
         this.segundoNombre = segundoNombre;
+        this.matricula = generarMatricula();
     }
 
     public Beneficiario(String ciudad, String dir, Date fecha, char gen, String primerNombre, String primerApellido, String segundoNombre, String segundoApellido, Date afiliacion, String tipoSeguro) {
@@ -191,6 +192,18 @@ public class Beneficiario extends Datos_Personales {
 
     public String getNombreCompleto() {
         return primerApellido + " " + segundoApellido + " " + primerNombre + " " + segundoNombre;
+    }
+
+    public String getNombre() {
+        return primerNombre + " " + segundoNombre;
+    }
+
+    public String getApellido() {
+        return primerApellido + " " + segundoApellido;
+    }
+
+    public String getNombreSimple(){
+        return primerApellido + " " + primerNombre;
     }
 
 

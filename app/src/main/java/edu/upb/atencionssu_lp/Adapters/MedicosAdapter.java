@@ -52,12 +52,13 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
                 }
             }
         });
-        holder.nombreTextView.setText(medico.getNombreCompleto());
-        holder.especialidadTextView.setText(medico.getEspecialidad());
-        holder.horarioEntradaTextView.setText(medico.getHorarioInicio());
-        holder.horarioSalidaTextView.setText(medico.getHorarioSalida());
-        holder.telefonoMovilTextView.setText(medico.getTelefonoMovil());
-        holder.correoDiarioTextView.setText(medico.getCorreoDiario());
+        holder.nombreTextView.setText("Medico: " + medico.getNombreSimple());
+        holder.especialidadTextView.setText("Especialidad: " + medico.getEspecialidad());
+        holder.horarioEntradaTextView.setText("Horario Entrada: " + medico.getHorarioInicio());
+        holder.horarioSalidaTextView.setText("Horario Salida: " + medico.getHorarioSalida());
+        holder.telefonoMovilTextView.setText("Celular: " + medico.getTelefonoMovil());
+        holder.correoDiarioTextView.setText("Mail: " + medico.getCorreoDiario());
+        holder.consultorioMedicoTextView.setText("Consultorio: " + medico.getConsultorio().getCodigo() + " en el piso " + medico.getConsultorio().getPiso());
     }
 
     @Override
@@ -93,6 +94,7 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
         TextView horarioSalidaTextView;
         TextView telefonoMovilTextView;
         TextView correoDiarioTextView;
+        TextView consultorioMedicoTextView;
 
 
         public ViewHolder(View itemView) {
@@ -105,6 +107,7 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
             horarioSalidaTextView = (TextView) itemView.findViewById(R.id.horarioSalidaTextView);
             telefonoMovilTextView = (TextView) itemView.findViewById(R.id.telefonoMovilTextView);
             correoDiarioTextView = (TextView) itemView.findViewById(R.id.correoDiarioTextView);
+            consultorioMedicoTextView=  (TextView) itemView.findViewById(R.id.consultorioMedicoTextView);
         }
     }
 }

@@ -23,6 +23,6 @@
 
     <item
         android:id="@+id/navigation_beneficiarios"
-        android:icon="@drawable/ic_action_afiliacion"
+        android:icon="@drawable/ic_action_usuario"
         android:title="Beneficiarios" />
 </menu>

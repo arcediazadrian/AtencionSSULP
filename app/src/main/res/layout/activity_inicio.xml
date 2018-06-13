@@ -10,14 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="30dp">
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/logo">
 
         <TextView
-            android:id="@+id/bienvenidoTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="28sp"
-            android:text="Bienvenido!"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido"
+            android:textSize="24sp"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

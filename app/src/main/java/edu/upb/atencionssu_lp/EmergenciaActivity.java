@@ -10,16 +10,15 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,9 +33,11 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
     protected Context context;
     private String latlng;
 
-    private TextView emergenciaTextView;
+    private String telefono = "tel:70198194";
 
+    private TextView emergenciaTextView;
     private FloatingActionButton emergenciaFloatingActionButton;
+    private FloatingActionButton llamadaFloatingActionButton;
 
 
     @Override
@@ -52,12 +53,23 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
         navigation.setOnNavigationItemSelectedListener(NavigatorDAO.mOnNavigationItemSelectedListener);
 
         emergenciaTextView = findViewById(R.id.emergenciaTextView);
-        emergenciaTextView.setText("Por favor espere mientras hallamos su localizacion...");
+        emergenciaTextView.setText("Enviar emergencia \nEncontrando su localizacion...");
 
         emergenciaFloatingActionButton = findViewById(R.id.emergenciaFloatingActionButton);
         emergenciaFloatingActionButton.setEnabled(false);
         emergenciaFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
         emergenciaFloatingActionButton.setAlpha(0.25f);
+
+        llamadaFloatingActionButton = findViewById(R.id.llamadaFloatingActionButton);
+        llamadaFloatingActionButton.setEnabled(true);
+        //llamadaFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf());
+
+        llamadaFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCall();
+            }
+        });
 
         emergenciaFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +102,11 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
         EmergenciaDAO.insertEmergencia(Credenciales.Titular.getID(), latlng, fecha_emergencia, context, new ServerCallback() {
             @Override
             public void onSucces() {
-                makeCall();
+                Toast.makeText(context, "Se envio su llamado de emergencia", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure() {
-                makeCall();
             }
         });
 
@@ -103,7 +114,7 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
 
     public void makeCall(){
         Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:70198194"));
+        callIntent.setData(Uri.parse(telefono));
 
         if (ActivityCompat.checkSelfPermission(EmergenciaActivity.this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -119,7 +130,7 @@ public class EmergenciaActivity extends AppCompatActivity implements LocationLis
         latlng = lat + " , " + lng;
 
 
-        emergenciaTextView.setText("Localizacion Encontrada!");
+        emergenciaTextView.setText("Enviar emergencia \nLocalizacion Encontrada!");
         emergenciaFloatingActionButton.setEnabled(true);
         emergenciaFloatingActionButton.setAlpha(1f);
     }

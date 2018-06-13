@@ -134,11 +134,11 @@ public class InicioActivity extends AppCompatActivity implements LocationListene
 
         context = getApplicationContext();
 
-        bienvenidoTextView = findViewById(R.id.bienvenidoTextView);
+        //bienvenidoTextView = findViewById(R.id.bienvenidoTextView);
 
         String msg = getIntent().getStringExtra("loginmsg");
         if(msg != null && !msg.equals("")) {
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
 
         NavigatorDAO.setActivity(context, "inicio");
